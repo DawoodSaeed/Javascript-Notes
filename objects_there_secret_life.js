@@ -102,3 +102,15 @@ console.log(ArchaicRabbit.__proto__);
 
 // 2. You create an Object with specific prototype using the Object.create();
 // 3.
+
+// Constuctor  prototype is always Function.prototype since it is a function.
+// And that prototype will hold the prototype need for other instances during there creation
+
+// Constructor Name start with Capital letter.
+// Can Omit class name when using as a Expression
+const object = new (class {
+  getName() {
+    console.log("name");
+  }
+})();
+object.getName();
