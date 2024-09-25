@@ -44,6 +44,8 @@ let rabbitPrototype = {
   speak(line) {
     console.log(`The ${this.type} rabbit says '${line}'`);
   },
+
+  namee: "Katana",
 };
 
 const blackRabbit = Object.create(rabbitPrototype);
@@ -114,3 +116,44 @@ const object = new (class {
   }
 })();
 object.getName();
+
+// There always be a constrctor when if we dont define it. it will be an empty constructor.
+// you can define regular properties by directly assigning to them in constructor
+// But u must define private properties before assiging to them
+
+class RandomSource {
+  #max;
+  constructor(max) {
+    this.#max = max;
+  }
+  getNumber() {
+    return Math.floor(Math.random() * this.#max);
+  }
+}
+// RandomSource.prototype.getNumber = function () {
+//   return Math.floor(Math.random() * this.#max);
+// };
+console.log(Object.getPrototypeOf(RandomSource) == Function.prototype);
+
+function createRabbit(type, name) {
+  if (name) {
+    this.name = name;
+  }
+  this.type = type;
+}
+
+createRabbit.prototype.name = "G Name";
+
+createRabbit.prototype.speak = function (line) {
+  console.log(`The ${this.name} rabbit says '${line}'`);
+};
+
+const newRabbit3 = new createRabbit("black");
+newRabbit3.speak("I am the fear and darkness.");
+
+const newRabbit4 = makeRabbit("Ridder");
+newRabbit4.speak("I am rider and i am the fear and darkness.");
+
+console.log(newRabbit4.namee);
+newRabbit4.namee = "Katana Rider"; //overriding the derived properties
+console.log(newRabbit4.namee);
